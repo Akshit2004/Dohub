@@ -14,6 +14,9 @@ const Dashboard = () => {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskNotes, setNewTaskNotes] = useState("");
   const [newTaskDeadline, setNewTaskDeadline] = useState("");
+  const [swipingTask, setSwipingTask] = useState(null);
+  const [swipeStartX, setSwipeStartX] = useState(null);
+  const [swipeTranslate, setSwipeTranslate] = useState({});
 
   // Add function to toggle task completion status
   const toggleTaskCompletion = async (index) => {
@@ -25,6 +28,57 @@ const Dashboard = () => {
     const taskId = updatedTasks[index].id;
     const taskRef = doc(db, 'users', user.uid, 'tasks', taskId);
     await updateDoc(taskRef, { completed: updatedTasks[index].completed });
+  };
+
+  // Handle swipe start
+  const handleSwipeStart = (e, idx) => {
+    setSwipingTask(idx);
+    setSwipeStartX(e.touches ? e.touches[0].clientX : e.clientX);
+  };
+
+  // Handle swipe move
+  const handleSwipeMove = (e, idx) => {
+    if (swipingTask !== idx) return;
+    const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+    const deltaX = currentX - swipeStartX;
+    if (deltaX > 0) {
+      setSwipeTranslate(prev => ({ ...prev, [idx]: deltaX }));
+    }
+  };
+
+  // Handle swipe end
+  const handleSwipeEnd = async (e, idx) => {
+    if (swipingTask !== idx) return;
+    const threshold = 120; // px to trigger delete
+    if (swipeTranslate[idx] > threshold) {
+      // Animate out, then delete
+      setSwipeTranslate(prev => ({ ...prev, [idx]: 500 }));
+      setTimeout(() => handleDeleteTask(idx), 300);
+    } else {
+      // Snap back
+      setSwipeTranslate(prev => ({ ...prev, [idx]: 0 }));
+    }
+    setSwipingTask(null);
+    setSwipeStartX(null);
+  };
+
+  // Delete task from Firestore and state
+  const handleDeleteTask = async (idx) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const taskId = tasks[idx].id;
+    // Remove from Firestore
+    try {
+      const taskRef = doc(db, 'users', user.uid, 'tasks', taskId);
+      await updateDoc(taskRef, { deleted: true }); // Or use deleteDoc if you want permanent delete
+    } catch (e) {}
+    // Remove from UI
+    setTasks(tasks => tasks.filter((_, i) => i !== idx));
+    setSwipeTranslate(prev => {
+      const newObj = { ...prev };
+      delete newObj[idx];
+      return newObj;
+    });
   };
 
   // Custom checkbox styling
@@ -232,7 +286,21 @@ const Dashboard = () => {
                 </div>
               ) : (
                 tasks.map((task, idx) => (
-                  <li key={idx} className={task.completed ? "completed" : ""}>
+                  <li
+                    key={idx}
+                    className={task.completed ? "completed" : ""}
+                    style={{
+                      transform: swipeTranslate[idx] ? `translateX(${swipeTranslate[idx]}px)` : undefined,
+                      transition: swipingTask === idx ? 'none' : 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
+                    }}
+                    onTouchStart={e => handleSwipeStart(e, idx)}
+                    onTouchMove={e => handleSwipeMove(e, idx)}
+                    onTouchEnd={e => handleSwipeEnd(e, idx)}
+                    onMouseDown={e => handleSwipeStart(e, idx)}
+                    onMouseMove={e => swipingTask === idx && handleSwipeMove(e, idx)}
+                    onMouseUp={e => handleSwipeEnd(e, idx)}
+                    onMouseLeave={e => swipingTask === idx && handleSwipeEnd(e, idx)}
+                  >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <div
                         style={task.completed ? checkedStyle : checkboxStyle}
