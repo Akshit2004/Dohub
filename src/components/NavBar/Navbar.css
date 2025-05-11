@@ -1,0 +1,213 @@
+/* Navbar Component Styles */
+
+/* Top Navbar */
+.top-navbar {
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px 0 rgba(59, 130, 246, 0.1);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(to right, #60A5FA, #A78BFA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #3b82f633;
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mode-toggle {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.mode-toggle:hover {
+  background-color: rgba(203, 213, 225, 0.1);
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.logout-button:hover {
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  color: #fff;
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-toggle.open {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.navbar-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #cbd5e1;
+  border-radius: 3px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-toggle.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggle.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Animated button styles */
+.animated-btn {
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+.animated-btn:hover, .animated-btn:focus {
+  transform: translateY(-2px) scale(1.06) rotate(-2deg);
+  box-shadow: 0 4px 18px 0 #8b5cf644;
+  z-index: 1;
+}
+.animated-btn:active {
+  transform: scale(0.97) rotate(1deg);
+  box-shadow: 0 2px 8px 0 #3b82f633;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .navbar-toggle {
+    display: flex;
+    z-index: 100;
+  }
+  
+  .navbar-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(17, 24, 39, 0.98);
+    backdrop-filter: blur(14px);
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    transition: right 0.3s ease;
+    z-index: 99;
+  }
+  
+  .navbar-nav.open {
+    right: 0;
+  }
+  
+  .navbar-actions {
+    margin-left: auto;
+  }
+}
+
+.sidebar-footer {
+  margin-top: 2rem;
+}
+
+.sidebar-logout {
+  width: 100%;
+  background: linear-gradient(135deg, #475569 0%, #64748B 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 2px 10px #64748b33;
+}
+
+.sidebar-logout:hover {
+  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+}
