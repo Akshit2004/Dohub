@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Dassboard.css";
 import Navbar from "../../components/NavBar/Navbar";
+import Footer from '../../components/Footer/Footer';
 import { db } from '../../firebase';
 import { collection, addDoc, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { auth } from '../../firebase';
@@ -346,6 +347,7 @@ const Dashboard = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

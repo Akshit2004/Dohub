@@ -1,12 +1,94 @@
-# React + Vite
+# DoHub - Premium To-Do App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![DoHub Banner](public/vite.svg)
 
-Currently, two official plugins are available:
+DoHub is a beautifully designed, modern, and responsive to-do list application built with React and Firebase. It helps you organize your tasks, track your productivity, and manage your day with ease. Featuring a premium dark theme, glassmorphism UI, and smooth animations, DoHub makes task management delightful on any device.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **User Authentication**: Secure login and registration with Firebase Auth
+- **Task Management**: Add, edit, complete, and delete tasks
+- **Swipe to Delete**: Slide a task to the right to delete it (mobile & desktop)
+- **Statistics Dashboard**: Visual overview of completed, pending, and overdue tasks
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop
+- **Modern UI**: Glassmorphism, gradients, and beautiful animations
+- **Light & Dark Mode**: Toggle between light and dark themes
+- **Profile Section**: View your profile and email
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```sh
+# Using PowerShell
+git clone https://github.com/your-username/do-hub.git
+do-hub
+cd do-hub
+```
+
+### 2. Install dependencies
+```sh
+npm install
+```
+
+### 3. Configure Firebase
+- Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+- Enable Authentication (Email/Password)
+- Create a Firestore database
+- Copy your Firebase config to `src/firebase.js`:
+
+```js
+// src/firebase.js
+export const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
+
+### 4. Start the development server
+```sh
+npm run dev
+```
+
+Visit [http://localhost:5173](http://localhost:5173) to view the app.
+
+## 📸 Screenshots
+
+![Dashboard](public/vite.svg)
+
+## 🛠️ Tech Stack
+- **Frontend**: React, Vite, CSS (Glassmorphism, Gradients)
+- **Backend**: Firebase Auth & Firestore
+
+## 📂 Project Structure
+```
+src/
+  components/
+    NavBar/
+      Navbar.jsx
+      Navbar.css
+  pages/
+    Dassboard/
+      Dashboard.jsx
+      Dassboard.css
+    login/
+      Login.jsx
+      Login.css
+  firebase.js
+  App.jsx
+  App.css
+  main.jsx
+```
+
+## 🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+This project is licensed under the MIT License.
+
+---
+
+> Designed & developed by Akshit

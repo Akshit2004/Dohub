@@ -1,0 +1,73 @@
+/* Glassmorphism Footer Styles */
+.footer-glass {
+  width: 100%;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(99, 102, 241, 0.13);
+  box-shadow: 0 -2px 16px rgba(99, 102, 241, 0.08);
+  padding: 1.2rem 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #e0e7ff;
+  font-size: 1rem;
+}
+
+.footer-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: #a78bfa;
+}
+
+.footer-text {
+  color: #cbd5e1;
+  font-size: 0.97rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-dot {
+  color: #a78bfa;
+  font-size: 1.2em;
+  margin: 0 4px;
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .footer-glass {
+    padding: 0.8rem 0;
+  }
+}
